@@ -1,0 +1,18 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# pfit project
+/pfit/shelf/
+/pfit/workspace.xml
+/pfit/httpRequests/
+/pfit/dataSources/
+/pfit/dataSources.local.xml
+/pfit/target
+/pfit/pfit.iml
+/pfit/.idea
