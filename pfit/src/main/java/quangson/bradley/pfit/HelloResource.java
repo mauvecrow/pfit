@@ -5,7 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import quangson.bradley.pfit.entities.Transactions;
+import quangson.bradley.pfit.transaction.Transaction;
 
 @Path("/hello-world")
 public class HelloResource {
@@ -16,7 +16,7 @@ public class HelloResource {
     @GET
     @Produces("text/plain")
     public String hello() {
-        var result = (Transactions) em.createQuery("select t from Transactions t").getSingleResult();
+        var result = (Transaction) em.createQuery("select t from Transaction t").getSingleResult();
         return result.toString();
     }
 }
