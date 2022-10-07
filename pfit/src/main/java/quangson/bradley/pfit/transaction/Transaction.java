@@ -1,4 +1,4 @@
-package quangson.bradley.pfit.entities;
+package quangson.bradley.pfit.transaction;
 
 import jakarta.persistence.*;
 
@@ -7,7 +7,13 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "transactions")
-public class Transactions implements Serializable {
+@NamedQueries({
+    @NamedQuery(name = "ownerTrx",
+            query = "select t from Transaction t where t.trxOwner = :owner"),
+    @NamedQuery(name = "recentOwnerTrx",
+            query = "select t from Transaction t where t.trxOwner = :owner and t.transactionDate >= :date")
+})
+public class Transaction implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +31,9 @@ public class Transactions implements Serializable {
     private double amount;
 
     private String notes;
+
+    @Column(name = "trx_owner")
+    private String trxOwner;
 
     // getter and setters
     public int getTransactionId() {
@@ -72,14 +81,22 @@ public class Transactions implements Serializable {
         this.notes = notes;
     }
 
+    public String getTrxOwner() {
+        return trxOwner;
+    }
+
+    public void setTrxOwner(String trxOwner) {
+        this.trxOwner = trxOwner;
+    }
+
     // equals, hashcode, and toString overrides
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Transactions)) return false;
+        if (!(o instanceof Transaction)) return false;
 
-        Transactions that = (Transactions) o;
+        Transaction that = (Transaction) o;
 
         return transactionId == that.transactionId;
     }
