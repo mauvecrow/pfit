@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core">
+<f:view>
+    <h:head>
+       <title>Register</title>
+    </h:head>
+   <h:body>
+      <h1>Register New Account</h1>
+      <h:form>
+         <h:outputLabel value="First Name" for="first-name"/>
+         <h:inputText id="first-name" value="#{cRegister.firstName}"/>
+         <br /><br />
+         <h:outputLabel value="Last Name" for="last-name"/>
+         <h:inputText id="last-name" value="#{cRegister.lastName}"/>
+         <br /><br />
+         <h:outputLabel value="Email" for="email"/>
+         <h:inputText id="email" value="#{cRegister.email}"/>
+         <br /><br />
+         <h:outputLabel value="Username" for="username"/>
+         <h:inputText id="username" value="#{cRegister.username}"/>
+         <br /><br />
+         <h:outputLabel value="Password" for="password"/>
+         <h:inputSecret id="password" value="#{cRegister.password}"/>
+         <br /><br />
+         <h:commandButton value="Register" action="#{cRegister.register()}"/>
+      </h:form>
+   </h:body>
+</f:view>
+</html>
