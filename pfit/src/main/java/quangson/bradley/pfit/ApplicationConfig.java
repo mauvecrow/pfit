@@ -9,7 +9,7 @@ import jakarta.security.enterprise.identitystore.DatabaseIdentityStoreDefinition
 @DatabaseIdentityStoreDefinition(
         dataSourceLookup = "java:/MySqlDS",
         callerQuery = "select enc_password from id_store_callers where username = ?",
-        groupsQuery = "select idsg.group from id_store_groups idsg, id_store_callers idsc " +
+        groupsQuery = "select idsg.group_name from id_store_groups idsg, id_store_callers idsc " +
                 "where idsg.caller_id = idsc.ids_caller_id and idsc.username = ?"
 )
 @CustomFormAuthenticationMechanismDefinition(
