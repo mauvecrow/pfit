@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core">
+<f:view>
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:outputLabel for="username" value="Username"/>
+            <h:inputText id="username" value="#{cLogin.username}" size="45" />
+            <br />
+            <h:outputLabel for="password" value="Password"/>
+            <h:inputSecret id="password" value="#{cLogin.password}" size="45" />
+            <br />
+            <h:commandButton value="Login" action="#{cLogin.login()}" ajax="false"/>
+        </h:form>
+    </h:body>
+
+</f:view>
+</html>
