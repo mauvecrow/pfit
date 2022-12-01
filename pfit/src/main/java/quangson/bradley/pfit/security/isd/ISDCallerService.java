@@ -5,7 +5,7 @@ import jakarta.inject.Inject;
 
 @Stateless
 public class ISDCallerService {
-
+/* don't think i need this anymore
     @Inject
     ISDCallerDao dao;
 
@@ -24,4 +24,5 @@ public class ISDCallerService {
     public void deleteUser(ISDCaller user){
         dao.delete(user);
     }
+    */
 }
