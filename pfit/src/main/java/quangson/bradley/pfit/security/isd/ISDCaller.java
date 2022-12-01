@@ -6,6 +6,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "id_store_callers")
+@NamedQueries({
+        @NamedQuery(name = "findByUsername", query = "SELECT c from ISDCaller c where c.username = :username"),
+})
 public class ISDCaller implements Serializable {
 
     @Id
