@@ -5,14 +5,14 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import quangson.bradley.pfit.security.isd.ISDCaller;
-import quangson.bradley.pfit.security.isd.ISDCallerService;
+import quangson.bradley.pfit.security.isd.SecurityFacade;
 
 @Named("cRegister")
 @RequestScoped
 public class RegisterController {
 
     @Inject
-    ISDCallerService service;
+    SecurityFacade service;
 
     @Inject
     Pbkdf2PasswordHash passwordHash;
@@ -35,10 +35,9 @@ public class RegisterController {
         return user;
     }
 
-
     public String register(){
         var user = buildUser();
-        service.addUser(user);
+        service.registerUser(user, SecurityFacade.GroupNames.PLANNER);
         return "login";
     }
     // getters and setters
