@@ -4,8 +4,7 @@ import jakarta.enterprise.context.RequestScoped;
 import quangson.bradley.pfit.util.JpaBasicDao;
 
 @RequestScoped
-@ISDCallerQ
-public class ISDCallerJpaBasicDao extends JpaBasicDao<ISDCaller>{
+public class ISDCallerJpaBasicDao extends JpaBasicDao<ISDCaller> implements ISDCallerDao{
     @Override
     protected Class<ISDCaller> assignClass() {
         return ISDCaller.class;

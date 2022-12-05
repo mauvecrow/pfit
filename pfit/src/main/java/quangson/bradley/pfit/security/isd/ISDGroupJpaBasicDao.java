@@ -4,8 +4,7 @@ import jakarta.enterprise.context.RequestScoped;
 import quangson.bradley.pfit.util.JpaBasicDao;
 
 @RequestScoped
-@ISDGroupQ
-public class ISDGroupJpaBasicDao extends JpaBasicDao<ISDGroup>{
+public class ISDGroupJpaBasicDao extends JpaBasicDao<ISDGroup> implements ISDGroupDao{
     @Override
     protected Class<ISDGroup> assignClass() {
         return ISDGroup.class;

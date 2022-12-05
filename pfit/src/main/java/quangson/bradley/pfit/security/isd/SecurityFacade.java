@@ -2,18 +2,15 @@ package quangson.bradley.pfit.security.isd;
 
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import quangson.bradley.pfit.util.BasicDao;
 
 @Stateless
 public class SecurityFacade {
 
     @Inject
-    @ISDGroupQ
-    private BasicDao<ISDGroup> groupDao;
+    private ISDGroupDao groupDao;
 
     @Inject
-    @ISDCallerQ
-    private BasicDao<ISDCaller> callerDao;
+    private ISDCallerDao callerDao;
 
 
     public void registerUser(ISDCaller newUser, GroupNames group){
