@@ -1,14 +1,13 @@
 package quangson.bradley.pfit.category;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity
+@MappedSuperclass
 public abstract class Category {
 
     @Id
     @Column(name = "category_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int categoryId;
     private String code;
     private String description;
