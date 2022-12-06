@@ -1,17 +1,21 @@
 package quangson.bradley.pfit.transaction;
 
-import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import quangson.bradley.pfit.util.JpaBasicDao;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Stateless
-public class JpaTransactionsDao implements TransactionsDao{
+@SessionScoped
+public class JpaTransactionDao extends JpaBasicDao<Transaction> implements TransactionDao, Serializable {
 
-    @PersistenceContext
-    EntityManager em;
+    private final EntityManager em;
+
+    public JpaTransactionDao() {
+        this.em = super.getEntityManager();
+    }
 
     @Override
     public List<Transaction> getTransactions(String trxOwner) {
@@ -29,24 +33,12 @@ public class JpaTransactionsDao implements TransactionsDao{
     }
 
     @Override
-    public void create(Transaction newTransaction) {
-        em.persist(newTransaction);
+    protected Class<Transaction> assignClass() {
+        return Transaction.class;
     }
 
     @Override
-    public Transaction read(int transactionId) {
-        return em.find(Transaction.class, transactionId);
-    }
-
-    @Override
-    public int update(Transaction curTransaction) {
-        var attachedEntity =
-                em.merge(curTransaction);
-        return attachedEntity.getTransactionId();
-    }
-
-    @Override
-    public void delete(Transaction transaction) {
-        em.remove(em.merge(transaction));
+    protected int getId(Transaction entity) {
+        return entity.getTransactionId();
     }
 }
