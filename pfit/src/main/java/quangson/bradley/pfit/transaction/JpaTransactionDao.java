@@ -1,5 +1,6 @@
 package quangson.bradley.pfit.transaction;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.persistence.EntityManager;
 import quangson.bradley.pfit.util.JpaBasicDao;
@@ -11,10 +12,11 @@ import java.util.List;
 @SessionScoped
 public class JpaTransactionDao extends JpaBasicDao<Transaction> implements TransactionDao, Serializable {
 
-    private final EntityManager em;
+    private EntityManager em;
 
-    public JpaTransactionDao() {
-        this.em = super.getEntityManager();
+    @PostConstruct
+    void init(){
+        em = getEntityManager();
     }
 
     @Override
