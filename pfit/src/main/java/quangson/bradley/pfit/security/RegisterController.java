@@ -5,17 +5,17 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import quangson.bradley.pfit.security.isd.ISDCaller;
-import quangson.bradley.pfit.security.isd.SecurityFacade;
+import quangson.bradley.pfit.security.isd.ejb.SecurityFacade;
 
 @Named("cRegister")
 @RequestScoped
 public class RegisterController {
 
     @Inject
-    SecurityFacade service;
+    private SecurityFacade service;
 
     @Inject
-    Pbkdf2PasswordHash passwordHash;
+    private Pbkdf2PasswordHash passwordHash;
 
     //ISDCaller fields
     private String username;
@@ -25,14 +25,13 @@ public class RegisterController {
     private String lastName;
 
     private ISDCaller buildUser(){
-        ISDCaller user = new ISDCaller(
+        return new ISDCaller(
                 username,
                 passwordHash.generate(password.toCharArray()),
                 email,
                 firstName,
                 lastName
         );
-        return user;
     }
 
     public String register(){
