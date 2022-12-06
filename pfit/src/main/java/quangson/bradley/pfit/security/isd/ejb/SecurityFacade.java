@@ -1,7 +1,11 @@
-package quangson.bradley.pfit.security.isd;
+package quangson.bradley.pfit.security.isd.ejb;
 
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
+import quangson.bradley.pfit.security.isd.ISDCaller;
+import quangson.bradley.pfit.security.isd.ISDCallerDao;
+import quangson.bradley.pfit.security.isd.ISDGroup;
+import quangson.bradley.pfit.security.isd.ISDGroupDao;
 
 @Stateless
 public class SecurityFacade {
