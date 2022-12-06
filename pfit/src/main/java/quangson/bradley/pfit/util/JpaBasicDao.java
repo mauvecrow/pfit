@@ -18,6 +18,10 @@ public abstract class JpaBasicDao<T> implements BasicDao<T>{
 
     protected abstract int getId(T entity);
 
+    protected EntityManager getEntityManager(){
+        return em;
+    }
+
     @Override
     public void create(T entity) {
         em.persist(entity);
@@ -47,7 +51,7 @@ public abstract class JpaBasicDao<T> implements BasicDao<T>{
     }
 
     @Override
-    public List<T> findMany() {
+    public List<T> findAll() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> q = cb.createQuery(assignClass());
         Root<T> root = q.from(assignClass());

@@ -10,6 +10,6 @@ public interface BasicDao<T> {
     void delete(T entity);
 
     T findOneByNamedQuery(String namedQuery, String paramName, String paramVal);
-    List<T> findMany();
+    List<T> findAll();
 
 }
