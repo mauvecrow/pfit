@@ -1,0 +1,25 @@
+.card-outer {
+    width: 20em;
+    /*     height: 20em; */
+    border: solid black 3px;
+}
+
+.card-text {
+    text-align: center;
+    border-bottom: solid black 3px;
+    background-color: blue;
+    color: white;
+    padding: .5em 0;
+    font-size: 2em;
+}
+
+.card-inner {
+    /*     outline: solid red 3px; */
+}
+
+.card-inner img{
+    /*     outline: dashed green 3px; */
+    display: block;
+    margin: 0 auto;
+    /*     object-fit: scale-down; */
+}

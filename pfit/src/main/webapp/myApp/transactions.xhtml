@@ -2,10 +2,15 @@
     xmlns:h="jakarta.faces.html"
     xmlns:ui="jakarta.faces.facelets"
     template="/WEB-INF/templates/homeTemplate.xhtml"
+    xmlns:bq="jakarta.faces.composite/bqcomp"
 >
     <ui:param name="title" value="My Transactions Home" />
+    <ui:define name="header">
+        <h:link value="Logout" outcome="#{cUser.logout()}"/>
+    </ui:define>
     <ui:define name="main">
-        <h3>Transactions</h3>
-        <p>something something something</p>
+        <h:outputStylesheet library="myApp" name="css/components.css" target="head" />
+        <h3>Welcome #{cUser.username}</h3>
+        <bq:card title="Import" image="upload.png"/>
     </ui:define>
 </ui:composition>
