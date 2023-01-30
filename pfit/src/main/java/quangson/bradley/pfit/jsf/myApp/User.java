@@ -1,14 +1,10 @@
-package quangson.bradley.pfit.jsf;
+package quangson.bradley.pfit.jsf.myApp;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.security.enterprise.SecurityContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
 import quangson.bradley.pfit.transaction.Transaction;
 import quangson.bradley.pfit.transaction.ejb.TrxManager;
 
@@ -18,9 +14,6 @@ import java.util.List;
 @Named("cUser")
 @SessionScoped
 public class User implements Serializable {
-
-    @Inject
-    private SecurityContext securityContext;
 
     @Inject
     private FacesContext facesContext;
@@ -35,19 +28,15 @@ public class User implements Serializable {
 
     @PostConstruct
     public void init(){
-        String rawName = securityContext.getCallerPrincipal()
-                .getName();
-        username = applyProperCasing(rawName);
-        transactions = trxManager.getRecentMonthlyTrx(username,monthlyOffset);
+//        String rawName = facesContext.getExternalContext()
+//                .getUserPrincipal()
+//                .getName();
+//        username = applyProperCasing(rawName);
+        username = "test user";
+//        transactions = trxManager.getRecentMonthlyTrx(username,monthlyOffset);
+        transactions = List.of();
     }
 
-
-    public String logout() throws ServletException {
-        ExternalContext ec = facesContext.getExternalContext();
-        ((HttpServletRequest)ec.getRequest())
-                .logout();
-        return "/index.html?faces-redirect=true";
-    }
 
     private String applyProperCasing(String name){
         return Character.toUpperCase(name.charAt(0)) +
@@ -68,5 +57,9 @@ public class User implements Serializable {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public String cardAction(String outcome){
+        return outcome;
     }
 }
