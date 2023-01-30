@@ -5,6 +5,7 @@
                   displayName="Simple Card component">
         <composite:attribute name="title" required="true" />
         <composite:attribute name="image" required="false" />
+        <composite:attribute name="navigation" />
     </composite:interface>
     <composite:implementation>
         <div class="card-outer">
@@ -12,7 +13,16 @@
                 <h:outputText value="#{cc.attrs.title}" />
             </div>
             <div class="card-inner">
-                <h:graphicImage library="images" name="#{cc.attrs.image}" rendered="#{not empty cc.attrs.image}"/>
+<h:form>
+<!--    <h:commandLink action="#{cUser.cardAction(cc.attrs.navigation)}" >-->
+<!--        <h:graphicImage library="images" name="#{cc.attrs.image}" rendered="#{not empty cc.attrs.image}"/>-->
+<!--    </h:commandLink>-->
+    <h:commandButton action="#{cc.attrs.navigation}" >
+        <h:graphicImage library="images" name="#{cc.attrs.image}" rendered="#{not empty cc.attrs.image}"/>
+    </h:commandButton>
+</h:form>
+
+
             </div>
         </div>
     </composite:implementation>

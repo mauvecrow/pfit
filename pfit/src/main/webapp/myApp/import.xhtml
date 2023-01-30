@@ -1,0 +1,18 @@
+<ui:composition
+        xmlns:h="jakarta.faces.html"
+        xmlns:ui="jakarta.faces.facelets"
+        template="/WEB-INF/templates/homeTemplate.xhtml"
+>
+    <ui:param name="title" value="Import Transactions" />
+    <ui:define name="header">
+        <h:link value="Home" outcome="#{cLogin.returnHome()}"/>
+        <br />
+        <h:link value="Logout" outcome="#{cLogin.logout()}"/>
+    </ui:define>
+    <ui:define name="main">
+        <h3>Import</h3>
+        <h:form enctype="multipart/form-data">
+            <h:inputFile value="#{cImport.uploadedFile}" />
+        </h:form>
+    </ui:define>
+</ui:composition>

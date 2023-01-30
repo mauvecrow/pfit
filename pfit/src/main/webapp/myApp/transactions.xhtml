@@ -6,11 +6,13 @@
 >
     <ui:param name="title" value="My Transactions Home" />
     <ui:define name="header">
-        <h:link value="Logout" outcome="#{cUser.logout()}"/>
+        <h:link value="Home" outcome="#{cLogin.returnHome()}"/>
+        <br />
+        <h:link value="Logout" outcome="#{cLogin.logout()}"/>
     </ui:define>
     <ui:define name="main">
         <h:outputStylesheet library="myApp" name="css/components.css" target="head" />
         <h3>Welcome #{cUser.username}</h3>
-        <bq:card title="Import" image="upload.png"/>
+        <bq:card title="Import" image="upload.png" navigation="import?faces-redirect=true"/>
     </ui:define>
 </ui:composition>
