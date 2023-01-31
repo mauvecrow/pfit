@@ -6,9 +6,9 @@
 >
     <ui:param name="title" value="My Transactions Home" />
     <ui:define name="header">
-        <h:link value="Home" outcome="#{cLogin.returnHome()}"/>
-        <br />
-        <h:link value="Logout" outcome="#{cLogin.logout()}"/>
+        <h:form>
+            <h:commandButton value="Logout" action="#{cLogin.logout()}"/>
+        </h:form>
     </ui:define>
     <ui:define name="main">
         <h:outputStylesheet library="myApp" name="css/components.css" target="head" />

@@ -28,12 +28,11 @@ public class User implements Serializable {
 
     @PostConstruct
     public void init(){
-//        String rawName = facesContext.getExternalContext()
-//                .getUserPrincipal()
-//                .getName();
-//        username = applyProperCasing(rawName);
-        username = "test user";
-//        transactions = trxManager.getRecentMonthlyTrx(username,monthlyOffset);
+        String rawName = facesContext.getExternalContext()
+                .getUserPrincipal()
+                .getName();
+        username = applyProperCasing(rawName);
+        transactions = trxManager.getRecentMonthlyTrx(username,monthlyOffset);
         transactions = List.of();
     }
 

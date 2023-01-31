@@ -27,15 +27,13 @@ public class LoginController {
     @Inject
     private FacesContext facesContext;
 
-    @Inject
-    private ExternalContext ec;
 
     private String username;
 
     private String password;
 
     public void login() throws IOException {
-//        ExternalContext ec = facesContext.getExternalContext();
+        ExternalContext ec = facesContext.getExternalContext();
         HttpServletRequest req = (HttpServletRequest) ec.getRequest();
         HttpServletResponse resp = (HttpServletResponse) ec.getResponse();
 
@@ -47,29 +45,6 @@ public class LoginController {
 //                        .newAuthentication(false);
         AuthenticationStatus outcome = securityContext.authenticate(req, resp, params);
 
-//        String url = (String) ec.getRequestMap()
-//                .get(RequestDispatcher.FORWARD_REQUEST_URI);
-//        System.out.println("url: " + url);
-//        String query = (String) ec.getRequestMap()
-//                .get(RequestDispatcher.FORWARD_QUERY_STRING);
-//        System.out.println("query: " + query);
-//
-//        if(outcome != AuthenticationStatus.SEND_FAILURE){
-////            req.getSession(true);
-//            System.out.println("auth status: " + outcome);
-////            ec.getSessionMap()
-////                    .putIfAbsent("jakarta.servlet.http.registerSession",
-////                           TRUE.toString());
-////            System.out.println("session user: " + ec.getSessionMap().get("user"));
-//
-//            if(url == null && outcome == AuthenticationStatus.SUCCESS){
-//                url = ec.getRequestContextPath() + "/myApp/transactions.xhtml";
-//                ec.redirect(url);
-//            }
-//            else if(url == null && outcome == AuthenticationStatus.SEND_CONTINUE){
-//                facesContext.responseComplete();
-//            }
-//        }
         switch(outcome){
             case SEND_CONTINUE -> facesContext.responseComplete();
             case SEND_FAILURE -> facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "invalid credentials", null));
