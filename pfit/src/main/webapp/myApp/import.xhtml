@@ -6,7 +6,7 @@
     <ui:param name="title" value="Import Transactions" />
     <ui:define name="header">
         <h:form>
-            <h:commandButton value="Home" action="transactions?faces-redirect=true"/>
+            <h:commandButton value="Home" action="home?faces-redirect=true"/>
             <br />
             <h:commandButton value="Logout" action="#{cLogin.logout()}"/>
         </h:form>
@@ -15,6 +15,8 @@
         <h3>Import</h3>
         <h:form enctype="multipart/form-data">
             <h:inputFile value="#{cImport.uploadedFile}" />
+            <br />
+            <h:commandButton value="Upload" action="#{cImport.upload()}" />
         </h:form>
     </ui:define>
 </ui:composition>
