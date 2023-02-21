@@ -115,6 +115,7 @@ public class Transaction implements Serializable{
                 ", vendor='" + vendor + '\'' +
                 ", amount=" + amount +
                 ", notes='" + notes + '\'' +
+                ", owner='" + trxOwner + '\'' +
                 '}';
     }
 }
