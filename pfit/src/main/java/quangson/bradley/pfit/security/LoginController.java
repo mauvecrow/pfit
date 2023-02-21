@@ -48,7 +48,7 @@ public class LoginController {
         switch(outcome){
             case SEND_CONTINUE -> facesContext.responseComplete();
             case SEND_FAILURE -> facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "invalid credentials", null));
-            case SUCCESS -> ec.redirect(ec.getRequestContextPath() + "/myApp/transactions.xhtml"); //throws IOException
+            case SUCCESS -> ec.redirect(ec.getRequestContextPath() + "/myApp/home.xhtml"); //throws IOException
         }
     }
 
@@ -60,7 +60,7 @@ public class LoginController {
     }
 
     public String returnHome() {
-        return "/myApp/transactions.xhtml?faces-redirect=true";
+        return "/myApp/home.xhtml?faces-redirect=true";
     }
 
     public String getUsername() {
