@@ -1,19 +1,17 @@
 package quangson.bradley.pfit.jsf.myApp;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import quangson.bradley.pfit.transaction.Transaction;
 import quangson.bradley.pfit.transaction.ejb.TrxManager;
-
-import java.io.Serializable;
 import java.util.List;
 
 @Named("cUser")
-@SessionScoped
-public class User implements Serializable {
+@RequestScoped
+public class User {
 
     @Inject
     private FacesContext facesContext;
