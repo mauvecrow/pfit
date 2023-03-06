@@ -11,8 +11,8 @@ import org.apache.logging.log4j.Logger;
 import quangson.bradley.pfit.transaction.ejb.TrxManager;
 
 import java.io.*;
-import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Named("cImport")
@@ -30,9 +30,6 @@ public class Import implements Serializable {
     private Part uploadedFile;
 
     public void upload(){
-//        String filename = Paths.get(uploadedFile.getSubmittedFileName())
-//                .getFileName()
-//                .toString();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(uploadedFile.getInputStream()))){
             String headerRow = br.readLine(); //read first line which is the header row
             String line;
@@ -41,7 +38,8 @@ public class Import implements Serializable {
               String[] rows = line.split(",");
               // expected structure: Date,Source,Vendor,Amount,Notes
               var newTrx = trxManager.startTrxBuild()
-                      .date(LocalDate.parse(rows[0], DateTimeFormatter.ofPattern("M/d/yyyy")))
+//                      .date(LocalDate.parse(rows[0], DateTimeFormatter.ofPattern("M/d/yyyy")))
+                      .date(Timestamp.valueOf(LocalDateTime.parse(rows[0], DateTimeFormatter.ofPattern("M/d/yyyy"))))
                       .source(rows[1])
                       .vendor(rows[2])
                       .amount(Double.parseDouble(rows[3]))
