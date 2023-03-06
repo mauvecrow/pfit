@@ -1,0 +1,48 @@
+<ui:composition
+        xmlns:h="jakarta.faces.html"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        template="/WEB-INF/templates/homeTemplate.xhtml"
+>
+    <ui:param name="title" value="Manage Transactions"/>
+    <ui:define name="header">
+        <ui:include src="/WEB-INF/includes/myAppHeader.xhtml"/>
+    </ui:define>
+    <ui:define name="main">
+        <h3>Transaction Details</h3>
+        <h:form>
+            <h:dataTable value="#{cTrxDetails.transactions}" var="t">
+                <h:column>
+                    <f:facet name="header">Transaction Date</f:facet>
+                    <h:outputText value="#{t.transactionDate}" rendered="#{not cTrxDetails.editableTrxMap.get(t)}">
+                        <f:convertDateTime pattern="yyyy-M-d"/>
+                    </h:outputText>
+                    <h:inputText value="#{t.transactionDate}" rendered="#{cTrxDetails.editableTrxMap.get(t)}">
+                        <f:convertDateTime pattern="yyyy-M-d"/>
+                    </h:inputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Source</f:facet>
+                    <h:outputText value="#{t.transactionSource}"/>
+                </h:column>
+<!--                -->
+<!--                <h:column>-->
+<!--                    <f:facet name="header">Vendor</f:facet>-->
+<!--                    <h:outputText value="#{t.key.vendor}"/>-->
+<!--                </h:column>-->
+<!--                <h:column>-->
+<!--                    <f:facet name="header">Amount</f:facet>-->
+<!--                    <h:outputText value="#{t.key.amount}"/>-->
+<!--                </h:column>-->
+<!--                <h:column>-->
+<!--                    <f:facet name="header">Notes</f:facet>-->
+<!--                    <h:outputText value="#{t.key.notes}"/>-->
+<!--                </h:column>-->
+                <h:column>
+                    <f:facet name="header">Edit</f:facet>
+                    <h:commandLink value="edit" action="#{cTrxDetails.toggleEdit(t)}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
