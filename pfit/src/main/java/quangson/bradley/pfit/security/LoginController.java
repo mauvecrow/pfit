@@ -11,9 +11,9 @@ import jakarta.security.enterprise.AuthenticationStatus;
 import jakarta.security.enterprise.SecurityContext;
 import jakarta.security.enterprise.authentication.mechanism.http.AuthenticationParameters;
 import jakarta.security.enterprise.credential.UsernamePasswordCredential;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import quangson.bradley.pfit.jsf.myApp.User;
 
 import java.io.IOException;
 
@@ -27,6 +27,8 @@ public class LoginController {
     @Inject
     private FacesContext facesContext;
 
+    @Inject
+    private User user;
 
     private String username;
 
@@ -48,15 +50,11 @@ public class LoginController {
         switch(outcome){
             case SEND_CONTINUE -> facesContext.responseComplete();
             case SEND_FAILURE -> facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "invalid credentials", null));
-            case SUCCESS -> ec.redirect(ec.getRequestContextPath() + "/myApp/home.xhtml"); //throws IOException
+            case SUCCESS -> {
+                user.setRawName(ec.getUserPrincipal().getName());
+                ec.redirect(ec.getRequestContextPath() + "/myApp/home.xhtml"); //throws IOException
+            }
         }
-    }
-
-    public String logout() throws ServletException {
-        ExternalContext ec = facesContext.getExternalContext();
-        ((HttpServletRequest)ec.getRequest())
-                .logout();
-        return "/index.html?faces-redirect=true";
     }
 
     public String returnHome() {

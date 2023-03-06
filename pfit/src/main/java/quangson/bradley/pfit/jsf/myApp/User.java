@@ -1,62 +1,56 @@
 package quangson.bradley.pfit.jsf.myApp;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import quangson.bradley.pfit.transaction.Transaction;
-import quangson.bradley.pfit.transaction.ejb.TrxManager;
-import java.util.List;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.Serializable;
+
 
 @Named("cUser")
-@RequestScoped
-public class User {
+@SessionScoped
+public class User implements Serializable {
 
+    private static final Logger logger = LogManager.getLogger(User.class);
     @Inject
     private FacesContext facesContext;
 
-    @Inject
-    private TrxManager trxManager;
-
-    private List<Transaction> transactions;
-
+    private String rawName;
     private String username;
-    private long monthlyOffset = 1;
 
-    @PostConstruct
-    public void init(){
-        String rawName = facesContext.getExternalContext()
-                .getUserPrincipal()
-                .getName();
-        username = applyProperCasing(rawName);
-        transactions = trxManager.getRecentMonthlyTrx(username,monthlyOffset);
-        transactions = List.of();
-    }
-
-
-    private String applyProperCasing(String name){
+    private static String applyProperCasing(String name){
         return Character.toUpperCase(name.charAt(0)) +
                 name.toLowerCase().substring(1);
     }
 
     public String getUsername() {
-        return username;
+        return null != rawName ? applyProperCasing(rawName) : "";
     }
 
-    public long getMonthlyOffset() {
-        return monthlyOffset;
+    public String getRawName() {
+        return rawName;
     }
 
-    public void setMonthlyOffset(long monthlyOffset) {
-        this.monthlyOffset = monthlyOffset;
-    }
-
-    public List<Transaction> getTransactions() {
-        return transactions;
+    public void setRawName(String rawName) {
+        this.rawName = rawName;
     }
 
     public String cardAction(String outcome){
         return outcome;
     }
+
+    public String logout() throws ServletException {
+        ExternalContext ec = facesContext.getExternalContext();
+        ((HttpServletRequest)ec.getRequest())
+                .logout();
+        return "/index.html?faces-redirect=true";
+    }
+
 }
