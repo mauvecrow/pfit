@@ -6,7 +6,7 @@ import jakarta.persistence.EntityManager;
 import quangson.bradley.pfit.util.JpaBasicDao;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @SessionScoped
@@ -27,7 +27,7 @@ public class JpaTransactionDao extends JpaBasicDao<Transaction> implements Trans
     }
 
     @Override
-    public List<Transaction> getRecentTransactions(String trxOwner, LocalDate sinceDate) {
+    public List<Transaction> getRecentTransactions(String trxOwner, Date sinceDate) {
         return em.createNamedQuery("recentOwnerTrx", Transaction.class)
                 .setParameter("owner", trxOwner)
                 .setParameter("date", sinceDate)
