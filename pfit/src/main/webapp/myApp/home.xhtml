@@ -1,18 +1,47 @@
 <ui:composition
     xmlns:h="jakarta.faces.html"
     xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core"
     template="/WEB-INF/templates/homeTemplate.xhtml"
     xmlns:bq="jakarta.faces.composite/bqcomp"
 >
     <ui:param name="title" value="My Transactions Home" />
     <ui:define name="header">
         <h:form>
-            <h:commandButton value="Logout" action="#{cLogin.logout()}"/>
+            <h:commandButton value="Logout" action="#{cUser.logout()}"/>
         </h:form>
     </ui:define>
     <ui:define name="main">
         <h:outputStylesheet library="myApp" name="css/components.css" target="head" />
         <h3>Welcome #{cUser.username}</h3>
-        <bq:card title="Import" image="upload.png" navigation="import?faces-redirect=true"/>
+        <div id="transactionDashboard">
+            <h4>Recent Transactionsh</h4>
+            <h:dataTable value="#{cHome.recentTrx}" var="trx">
+                <h:column>
+                    <f:facet name="header">Transaction Date</f:facet>
+                    <h:outputText value="#{trx.transactionDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Source</f:facet>
+                    <h:outputText value="#{trx.transactionSource}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Vendor</f:facet>
+                    <h:outputText value="#{trx.vendor}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Amount</f:facet>
+                    <h:outputText value="#{trx.amount}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Notes</f:facet>
+                    <h:outputText value="#{trx.notes}"/>
+                </h:column>
+            </h:dataTable>
+        </div>
+        <div id="sideNavigation">
+            <bq:card title="Import" image="upload.png" navigation="import?faces-redirect=true"/>
+            <bq:card title="Details" image="manageTrx.png" navigation="transactionDetails?faces-redirect=true"/>
+        </div>
     </ui:define>
 </ui:composition>
