@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "transactions")
@@ -22,7 +21,7 @@ public class Transaction implements Serializable{
     private int transactionId;
 
     @Column(name = "trx_date")
-    private Date transactionDate;
+    private LocalDate transactionDate;
 
     @Column(name = "source")
     private String transactionSource;
@@ -42,11 +41,11 @@ public class Transaction implements Serializable{
     }
     // no setter for id
 
-    public Date getTransactionDate() {
+    public LocalDate getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
     }
 

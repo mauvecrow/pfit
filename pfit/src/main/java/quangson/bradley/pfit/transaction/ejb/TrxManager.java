@@ -6,9 +6,7 @@ import quangson.bradley.pfit.transaction.Transaction;
 import quangson.bradley.pfit.transaction.TransactionDao;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Stateless
@@ -27,8 +25,7 @@ public class TrxManager implements Serializable {
     }
 
     public List<Transaction> getRecentMonthlyTrx(String username, long offset){
-        Date date = Timestamp.valueOf(LocalDateTime.now().minusMonths(offset));
-        return dao.getRecentTransactions(username, date);
+        return dao.getRecentTransactions(username, LocalDate.now().minusMonths(offset) );
     }
 
     public TrxBuilder startTrxBuild(){
@@ -41,20 +38,20 @@ public class TrxManager implements Serializable {
 
 
     public static class TrxBuilder {
-        private Date trxDate;
+        private LocalDate trxDate;
         private String trxSource;
         private String trxVendor;
         private double trxAmt;
         private String notes = null;
         private String trxOwner = null;
         private TrxBuilder(){
-            trxDate = Timestamp.valueOf(LocalDateTime.now());
+            trxDate = LocalDate.now();
             trxSource = "Manual entry";
             trxVendor = "unknown";
             trxAmt = 0.0;
         }
 
-        public TrxBuilder date(Date date){
+        public TrxBuilder date(LocalDate date){
             this.trxDate = date;
             return this;
         }
