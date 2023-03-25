@@ -15,7 +15,7 @@
         <h:outputStylesheet library="myApp" name="css/components.css" target="head" />
         <h3>Welcome #{cUser.username}</h3>
         <div id="transactionDashboard">
-            <h4>Recent Transactionsh</h4>
+            <h4>Recent Transactions</h4>
             <h:dataTable value="#{cHome.recentTrx}" var="trx">
                 <h:column>
                     <f:facet name="header">Transaction Date</f:facet>
