@@ -35,7 +35,9 @@ public class TrxManager implements Serializable {
         return trxBuilder;
     }
 
-
+    public int save(Transaction trx){
+        return dao.update(trx);
+    }
 
     public static class TrxBuilder {
         private LocalDate trxDate;

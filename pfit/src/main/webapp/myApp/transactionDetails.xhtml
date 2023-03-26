@@ -11,6 +11,7 @@
     <ui:define name="main">
         <h3>Transaction Details</h3>
         <h:form>
+
             <h:dataTable value="#{cTrxDetails.transactions}" var="t">
                 <h:column>
                     <f:facet name="header">Transaction Date</f:facet>
@@ -23,23 +24,38 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Source</f:facet>
-                    <h:outputText value="#{t.transactionSource}"/>
+                    <h:outputText value="#{t.transactionSource}" rendered="#{not cTrxDetails.editableTrxMap.get(t)}"/>
+                    <h:inputText value="#{t.transactionSource}" rendered="#{cTrxDetails.editableTrxMap.get(t)}" />
                 </h:column>
                 <h:column>
                     <f:facet name="header">Vendor</f:facet>
-                    <h:outputText value="#{t.vendor}"/>
+                    <h:outputText value="#{t.vendor}" rendered="#{not cTrxDetails.editableTrxMap.get(t)}"/>
+                    <h:inputText value="#{t.vendor}" rendered="#{cTrxDetails.editableTrxMap.get(t)}" />
                 </h:column>
                 <h:column>
                     <f:facet name="header">Amount</f:facet>
-                    <h:outputText value="#{t.amount}"/>
+                    <h:outputText value="#{t.amount}" rendered="#{not cTrxDetails.editableTrxMap.get(t)}"/>
+                    <h:inputText value="#{t.amount}" rendered="#{cTrxDetails.editableTrxMap.get(t)}" />
                 </h:column>
                 <h:column>
                     <f:facet name="header">Notes</f:facet>
-                    <h:outputText value="#{t.notes}"/>
+                    <h:outputText value="#{t.notes}" rendered="#{not cTrxDetails.editableTrxMap.get(t)}"/>
+                    <h:inputTextarea value="#{t.notes}" rendered="#{cTrxDetails.editableTrxMap.get(t)}" />
                 </h:column>
                 <h:column>
                     <f:facet name="header">Edit</f:facet>
-                    <h:commandLink value="edit" action="#{cTrxDetails.toggleEdit(t)}"/>
+                    <h:commandLink value="edit" action="#{cTrxDetails.toggleEdit(t)}"
+                                   rendered="#{not cTrxDetails.editableTrxMap.get(t)}">
+                        <f:ajax execute="@form" render="@form" />
+                    </h:commandLink>
+                    <h:commandLink value="cancel" action="#{cTrxDetails.toggleEdit(t)}"
+                                   rendered="#{cTrxDetails.editableTrxMap.get(t)}">
+                        <f:ajax execute="@form" render="@form" />
+                    </h:commandLink>
+                    <h:commandLink value="save" action="#{cTrxDetails.save(t)}"
+                                   rendered="#{cTrxDetails.editableTrxMap.get(t)}">
+                        <f:ajax execute="@form" render="@form" />
+                    </h:commandLink>
                 </h:column>
             </h:dataTable>
         </h:form>
