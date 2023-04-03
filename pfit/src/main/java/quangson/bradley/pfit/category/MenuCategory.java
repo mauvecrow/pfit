@@ -1,25 +1,14 @@
 package quangson.bradley.pfit.category;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.inject.Qualifier;
 
-@Entity
-@Table(name = "menu_category")
-public class MenuCategory extends Category{
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    @Transient
-    public static final Category.Type categoryType = Type.Menu;
-
-    @Column(name = "parent_id")
-    private int parentId;
-
-    public int getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
-    }
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.TYPE})
+public @interface MenuCategory {
 }

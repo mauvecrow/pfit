@@ -1,24 +1,14 @@
 package quangson.bradley.pfit.category;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.inject.Qualifier;
 
-@Entity
-@Table(name = "simple_category")
-public class SimpleCategory extends Category{
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    @Transient
-    public static final Category.Type categoryType = Type.Simple;
-
-    private int group;
-
-    public int getGroup() {
-        return group;
-    }
-
-    public void setGroup(int group) {
-        this.group = group;
-    }
-
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.TYPE})
+public @interface SimpleCategory {
 }
